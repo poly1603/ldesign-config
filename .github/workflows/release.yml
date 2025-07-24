@@ -1,0 +1,101 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      id-token: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 8
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'pnpm'
+        registry-url: 'https://registry.npmjs.org'
+    
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+    
+    - name: Run tests
+      run: pnpm run test
+    
+    - name: Build package
+      run: pnpm run build
+    
+    - name: Build documentation
+      run: pnpm run docs:build
+    
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+        body: |
+          ## 🚀 新版本发布
+          
+          ### 📦 安装
+          ```bash
+          npm install ldesign-config@${{ github.ref_name }}
+          # 或者
+          pnpm add ldesign-config@${{ github.ref_name }}
+          ```
+          
+          ### 📖 文档
+          查看完整文档：[LDesign Config 文档](https://github.com/ldesign/ldesign-config)
+          
+          ### 🔄 更新日志
+          请查看 [CHANGELOG.md](https://github.com/ldesign/ldesign-config/blob/main/CHANGELOG.md) 了解详细更新内容。
+    
+    - name: Publish to NPM
+      run: pnpm publish --no-git-checks
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    
+    - name: Deploy documentation
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/.vitepress/dist
+        cname: ldesign-config.dev
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: release
+    if: always()
+    
+    steps:
+    - name: Notify success
+      if: needs.release.result == 'success'
+      run: |
+        echo "✅ Release successful!"
+        echo "Package published to NPM"
+        echo "Documentation deployed to GitHub Pages"
+    
+    - name: Notify failure
+      if: needs.release.result == 'failure'
+      run: |
+        echo "❌ Release failed!"
+        echo "Please check the logs and try again"
+        exit 1
