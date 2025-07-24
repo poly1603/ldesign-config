@@ -221,6 +221,6 @@ try {
 
 ## 下一步
 
-- 查看 [TypeScript 项目示例](./typescript.md)
-- 了解 [Express 应用集成](./express.md)
-- 探索 [高级功能](../guide/hot-reload.md)
+- 查看 [基础用法指南](../guide/basic-usage.md)
+- 了解 [安装说明](../guide/installation.md)
+- 探索 [API 文档](../api/config.md)

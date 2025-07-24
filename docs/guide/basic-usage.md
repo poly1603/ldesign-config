@@ -148,6 +148,6 @@ try {
 
 ## 下一步
 
-- 了解 [配置文件格式](./file-formats.md)
-- 学习 [环境配置](./environment-config.md)
-- 探索 [文件监听](./file-watching.md) 功能
+- 查看 [基础示例](../examples/basic.md)
+- 了解 [安装说明](./installation.md)
+- 探索 [API 文档](../api/config.md)

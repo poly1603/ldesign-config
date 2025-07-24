@@ -4,6 +4,8 @@ export default defineConfig({
   title: 'LDesign Config',
   description: '强大的 Node.js 配置加载插件，支持多种格式和热重载',
   
+  ignoreDeadLinks: true,
+  
   themeConfig: {
     nav: [
       { text: '指南', link: '/guide/getting-started' },
