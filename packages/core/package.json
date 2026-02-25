@@ -1,0 +1,54 @@
+{
+  "name": "@ldesign/config-core",
+  "version": "0.1.0",
+  "description": "LDesign 配置中心 - 框架无关的核心模块",
+  "keywords": [
+    "ldesign",
+    "config",
+    "configuration",
+    "settings",
+    "env",
+    "typescript"
+  ],
+  "author": "LDesign Team",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.cjs",
+      "default": "./es/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./lib/index.cjs",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
+  "files": [
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "es",
+    "lib"
+  ],
+  "scripts": {
+    "build": "ldesign-builder build",
+    "dev": "ldesign-builder build --watch",
+    "clean": "rimraf dist es lib",
+    "lint": "eslint . --fix",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.0.0",
+    "@ldesign/builder": "workspace:*",
+    "eslint": "^9.18.0",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.7.3",
+    "vitest": "^2.0.0"
+  },
+  "typings": "./es/index.d.ts",
+  "browser": "./dist/index.js"
+}

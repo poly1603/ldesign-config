@@ -1,0 +1,62 @@
+{
+  "name": "@ldesign/config-vue",
+  "version": "0.1.0",
+  "description": "LDesign 配置中心 - Vue 3 适配器",
+  "keywords": [
+    "ldesign",
+    "config",
+    "configuration",
+    "settings",
+    "env",
+    "vue",
+    "vue3",
+    "composable",
+    "typescript"
+  ],
+  "author": "LDesign Team",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.cjs",
+      "default": "./es/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./lib/index.cjs",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
+  "files": [
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "es",
+    "lib"
+  ],
+  "scripts": {
+    "build": "ldesign-builder build",
+    "dev": "ldesign-builder build --watch",
+    "clean": "rimraf dist es lib",
+    "lint": "eslint . --fix"
+  },
+  "dependencies": {
+    "@ldesign/config-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.0.0",
+    "@ldesign/builder": "workspace:*",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "eslint": "^9.18.0",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.7.3",
+    "vue": "^3.3.0"
+  },
+  "typings": "./es/index.d.ts",
+  "browser": "./dist/index.js"
+}

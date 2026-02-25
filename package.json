@@ -1,0 +1,58 @@
+{
+  "name": "@ldesign/config",
+  "version": "0.1.0",
+  "description": "LDesign 配置中心 - 统一导出 core 和 vue 子包",
+  "keywords": [
+    "ldesign",
+    "config",
+    "configuration",
+    "settings",
+    "env",
+    "vue",
+    "typescript"
+  ],
+  "author": "LDesign Team",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.cjs",
+      "default": "./es/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./lib/index.cjs",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
+  "files": [
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "es",
+    "lib",
+    "dist"
+  ],
+  "scripts": {
+    "build": "ldesign-builder build",
+    "build:packages": "pnpm --filter './packages/*' build",
+    "dev": "ldesign-builder build --mode development --watch",
+    "clean": "rimraf es lib dist"
+  },
+  "dependencies": {
+    "@ldesign/config-core": "workspace:*",
+    "@ldesign/config-vue": "workspace:*"
+  },
+  "devDependencies": {
+    "@ldesign/builder": "workspace:*",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "typings": "./es/index.d.ts",
+  "browser": "./dist/index.js"
+}
